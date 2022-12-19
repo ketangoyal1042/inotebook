@@ -6,3 +6,4 @@ for backend--------------------------------
 3. npm i mongo (it s a abstraction layer to connect with node and express)
 4. npm i -D nodemon  then  nodemon ./index.js      
 5. npm i mongoose
+6. npm install --save express-validator   // using express-validator for validation before store collection in DB 
