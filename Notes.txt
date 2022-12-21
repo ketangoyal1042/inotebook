@@ -5,5 +5,7 @@ for backend--------------------------------
 2. npm i express
 3. npm i mongo (it s a abstraction layer to connect with node and express)
 4. npm i -D nodemon  then  nodemon ./index.js      
-5. npm i mongoose
-6. npm install --save express-validator   // using express-validator for validation before store collection in DB 
+5. npm i mongoose                  --https://mongoosejs.com/docs/guide.html
+6. npm install --save express-validator   // using this for validation before store collection in DB        -- https://express-validator.github.io/docs/
+7. npm install bcryptjs   // using this package for encrpt password  --- https://www.npmjs.com/package/bcryptjs
+8. npm i jsonwebtoken  // it return a token after user authontication --- https://www.npmjs.com/package/jsonwebtoken

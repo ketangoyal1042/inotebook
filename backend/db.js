@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 mongoose.set('strictQuery', false);
-const mongURI = "mongodb://0.0.0.0:27017";
+const mongURI = "mongodb://0.0.0.0:27017/inotebook";
 
 const connectToMongoose = ()=>{
     mongoose.connect(mongURI, {

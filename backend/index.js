@@ -3,7 +3,7 @@ const express = require('express')
 
 connectToMongoose();
 const app = express()
-const port = 3002
+const port = 5000
 
 app.use(express.json());
 // app.get('/', (req, res) => {

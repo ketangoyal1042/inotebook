@@ -21,4 +21,6 @@ const UserSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('user', UserSchema);
+const user = mongoose.model('user', UserSchema);
+// user.createIndexes(); // this is creating a new email index, so we not need that. and making a logic for unique email in auth.js
+module.exports = user;
