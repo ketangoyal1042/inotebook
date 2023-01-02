@@ -39,7 +39,7 @@ router.post('/addnote', getchusermiddleware, [
 });
 
 // Update user notes using: PUT "/api/notes/updatenode". LOGIN Required
-router.put('/updatenode/:nid', getchusermiddleware, async (req, res) => {
+router.put('/updatenote/:nid', getchusermiddleware, async (req, res) => {
     const { title, description, tag } = req.body;
 
     try {

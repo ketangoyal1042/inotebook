@@ -9,7 +9,7 @@ for backend--------------------------------
 6. npm install --save express-validator   // using this for validation before store collection in DB        -- https://express-validator.github.io/docs/
 7. npm install bcryptjs   // using this package for encrpt password  --- https://www.npmjs.com/package/bcryptjs
 8. npm i jsonwebtoken  // it return a token after user authontication --- https://www.npmjs.com/package/jsonwebtoken
-
+9. npm install cors // 
 for frontend--------------------------------
 
 1. npm install react-router-dom concurrently
