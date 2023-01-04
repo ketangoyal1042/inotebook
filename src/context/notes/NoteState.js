@@ -86,7 +86,7 @@ export default function NoteState(props) {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0a24iOnsiaWQiOiI2M2EzNTI1OTA3NzAyMDkzOWRhNDdjMWMifSwiaWF0IjoxNjcxNzE4MjUzfQ.F0y2ItYfcUMkheWpwOnBNwM9pI-8iwZW4CoHrYHlKLQ"
+                'auth-token': localStorage.getItem('token')
             },
         });
         const data = await response.json();
@@ -101,7 +101,7 @@ export default function NoteState(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0a24iOnsiaWQiOiI2M2EzNTI1OTA3NzAyMDkzOWRhNDdjMWMifSwiaWF0IjoxNjcxNzE4MjUzfQ.F0y2ItYfcUMkheWpwOnBNwM9pI-8iwZW4CoHrYHlKLQ"
+                'auth-token': localStorage.getItem('token')
             },
             body: JSON.stringify({ title, description, tag })  // provide the data which we provide in body section
         });
@@ -128,7 +128,7 @@ export default function NoteState(props) {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0a24iOnsiaWQiOiI2M2EzNTI1OTA3NzAyMDkzOWRhNDdjMWMifSwiaWF0IjoxNjcxNzE4MjUzfQ.F0y2ItYfcUMkheWpwOnBNwM9pI-8iwZW4CoHrYHlKLQ"
+                'auth-token': localStorage.getItem('token')
             },
             body: JSON.stringify({ title, description, tag })
         });
@@ -157,7 +157,7 @@ export default function NoteState(props) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'auth-token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0a24iOnsiaWQiOiI2M2EzNTI1OTA3NzAyMDkzOWRhNDdjMWMifSwiaWF0IjoxNjcxNzE4MjUzfQ.F0y2ItYfcUMkheWpwOnBNwM9pI-8iwZW4CoHrYHlKLQ"
+                'auth-token': localStorage.getItem('token')
             },
         });
         const json = response.json();

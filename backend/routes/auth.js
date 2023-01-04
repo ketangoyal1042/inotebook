@@ -14,10 +14,12 @@ router.post('/register', [
     body('email', "Enter a Valid Email").isEmail(),    // these 3 validations are being added using express-validator packeage
     body('password', "Please provide Password of min length 5").isLength({ min: 5 }),
 ], async function (req, res) {
+    let success = false;
     // if there are errors in validation return a bad request and errors corrspoinding the validation result
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        success = false;
+        return res.status(400).json({success, error: errors.array() });
     }
     // console.log(req.body);
     // const user = User(req.body);
@@ -28,7 +30,8 @@ router.post('/register', [
         //check weather the user with the same email exists already
         let user = await User.findOne({ email: req.body.email }); // this goes to DB and check this email exists
         if (user) {
-            res.status(400).json({ errors: "Sorry, User with this Email Already Exists", email: req.body.email });
+            success = false;
+            res.status(400).json({success, error: "Sorry, User with this Email Already Exists", email: req.body.email });
         }
 
         var salt = await bcrypt.genSaltSync(10);
@@ -52,9 +55,9 @@ router.post('/register', [
         }
         const authToken = jwt.sign(data, JWT_SECRET);  // it is a Synchronously signed JWT token so no need of await
         console.log(authToken);
-
+        success = true;
         // res.json({ result: user, email: req.body.email, status: "User Created Stauts Okji" });
-        res.json({authToken});
+        res.json({success,authToken});
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Some internal Server Error occurred");
@@ -66,6 +69,7 @@ router.post('/login',[
     body('email', "Enter a Valid Email").isEmail(),    // these 3 validations are being added using express-validator packeage
     body('password', "Please cannot be blank").exists(),
 ], async (req, res)=>{
+    let success = false;
     // if there are errors in validation return a bad request and errors corrspoinding the validation result
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -76,12 +80,14 @@ router.post('/login',[
     let user = await User.findOne({email});
     console.log(user);
     if (!user) {
-       return res.status(400).json({error: "Please enter correct credentials"});
+        success = false;
+        return res.status(400).json({success, error: "Please enter correct credentials"});
     }
 
     const passwordcompare = await bcrypt.compare(password, user.password);
     if (!passwordcompare){
-        return res.status(400).json({error: "Please enter correct credentials"});
+        success = false;
+        return res.status(400).json({success, error: "Please enter correct credentials"});
     }
     const data = {
         tkn:{
@@ -89,7 +95,8 @@ router.post('/login',[
         }
     }
     const authToken = jwt.sign(data, JWT_SECRET);
-    res.json({authToken});
+    success = true;
+    res.json({success, authToken});
 
 })
 

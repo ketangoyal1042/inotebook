@@ -1,14 +1,21 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import noteContext from '../context/notes/noteContext'
 import AddNote from './AddNote';
 import NoteItem from './NoteItem';
 
-export default function Notes() {
+export default function Notes(props) {
+    const navigator = useNavigate();
     const context = useContext(noteContext);
     const { notes, FetchAllNotes, editNote } = context; // don't confise it is destructing 
-
+    const {SetAlert} = props; 
     useEffect(() => {
-        FetchAllNotes();
+        if (localStorage.getItem('token')) {
+            FetchAllNotes();
+            
+        } else {
+            navigator('/login');
+        }
     }, []);
 
     const ref = useRef(null);
@@ -26,11 +33,12 @@ export default function Notes() {
     const submitHandler = (e) => {
         editNote(note.eid, note.etitle, note.edescription, note.etag);
         Closeref.current.click();
+        SetAlert("Note Updated Successfully", "success");
     };
 
     return (
         <>
-            <AddNote />
+            <AddNote SetAlert={SetAlert}/>
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" ref={ref} style={{ "display": "none" }}>
                 Launch demo modal
             </button>
@@ -71,7 +79,7 @@ export default function Notes() {
                 <div className="row">
                     {notes.map((note) => {
                         // return note.title;
-                        return <NoteItem key={note._id} note={note} ModalUpdateNote={UpdateNote} />
+                        return <NoteItem key={note._id} note={note} ModalUpdateNote={UpdateNote} SetAlert={SetAlert}/>
                     })}
                 </div>
             </div>

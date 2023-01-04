@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import noteContext from '../context/notes/noteContext'
 
-export default function AddNote() {
+export default function AddNote(props) {
+    const {SetAlert} = props;
     const Notes = useContext(noteContext);
     const {addNote} = Notes;  // it is destructoring 
     const [note, setnote] = useState({title: "", description: "", tag: ""});
@@ -12,6 +13,7 @@ export default function AddNote() {
         e.preventDefault();
         addNote(note.title, note.description, note.tag);
         setnote({title: "", description: "", tag: ""});
+        SetAlert("Note added successfully", "success");
     };
     return (
         <div>
